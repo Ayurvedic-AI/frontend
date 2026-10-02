@@ -1,9 +1,9 @@
 import { useEffect, type ReactNode } from 'react';
-import { useQueryClient } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 import { CustomButton } from '../../../common/custom-buttons';
 import { CustomDrawer } from '../../../common/custom-drawer';
 import { toast } from '../../../common/common-snackbar';
+import { errorMessage } from '../../../utils/api-messages';
 import {
   RHFDatePicker,
   RHFInput,
@@ -18,11 +18,10 @@ import {
   LANGUAGE_LABEL,
   PRAKRITI_LABEL,
   STATUS_LABEL,
-  getPatientsListQueryKey,
   usePatientsCreate,
   usePatientsUpdate,
   type Patient,
-} from '../api/patients-stubs';
+} from '../api/patients';
 import {
   toFormValues,
   toPatientInput,
@@ -61,7 +60,6 @@ function Section({ title, hint, children }: { title: string; hint?: string; chil
 const full = 'sm:col-span-2';
 
 export function PatientFormDrawer({ open, patient, onClose }: PatientFormDrawerProps) {
-  const queryClient = useQueryClient();
   const { control, handleSubmit, reset } = usePatientForm();
   const isEdit = patient !== null;
 
@@ -69,18 +67,25 @@ export function PatientFormDrawer({ open, patient, onClose }: PatientFormDrawerP
     if (open) reset(toFormValues(patient));
   }, [open, patient, reset]);
 
+  // The list refetches on its own: query-client invalidates every query after a successful mutation.
   const onSaved = (message: string) => {
-    queryClient.invalidateQueries({ queryKey: getPatientsListQueryKey() });
     toast({ message, severity: 'success' });
     onClose();
   };
-  const onError = () => toast({ message: 'Could not save the patient. Try again.', severity: 'error' });
+  const onError = (err: unknown) =>
+    toast({ message: errorMessage(err, 'Could not save the patient. Try again.'), severity: 'error' });
 
   const createMutation = usePatientsCreate({
-    mutation: { onSuccess: (res) => onSaved(`${res.data.full_name} added as ${res.data.id}`), onError },
+    mutation: {
+      onSuccess: (res) => onSaved(res.status === 201 ? `${res.data.full_name} added as ${res.data.id}` : 'Patient added'),
+      onError,
+    },
   });
   const updateMutation = usePatientsUpdate({
-    mutation: { onSuccess: (res) => onSaved(`${res.data.full_name} updated`), onError },
+    mutation: {
+      onSuccess: (res) => onSaved(res.status === 200 ? `${res.data.full_name} updated` : 'Patient updated'),
+      onError,
+    },
   });
   const saving = createMutation.isPending || updateMutation.isPending;
 

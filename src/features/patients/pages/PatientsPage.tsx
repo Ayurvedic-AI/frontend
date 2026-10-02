@@ -1,5 +1,4 @@
 import { useMemo, useState } from 'react';
-import { useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { Plus, SearchX, UserPlus } from 'lucide-react';
 import { CommonTable } from '../../../common/common-table';
@@ -7,15 +6,16 @@ import { ConfirmationPopUp } from '../../../common/confirmation-pop-up';
 import { CustomButton } from '../../../common/custom-buttons';
 import { CustomSearch } from '../../../common/custom-search';
 import { CustomSelect } from '../../../common/custom-select';
+import { PageHeader } from '../../../common/page-header';
 import { toast } from '../../../common/common-snackbar';
+import { errorMessage } from '../../../utils/api-messages';
 import {
   PRAKRITI_LABEL,
   STATUS_LABEL,
-  getPatientsListQueryKey,
   usePatientsDelete,
   usePatientsList,
   type Patient,
-} from '../api/patients-stubs';
+} from '../api/patients';
 import { PatientFormDrawer } from '../components/PatientFormDrawer';
 import { patientColumns } from '../components/patient-columns';
 import { filterPatients, type PatientFilters } from '../utils/filter-patients';
@@ -25,7 +25,6 @@ const PRAKRITI_ITEMS = [{ value: 'all', label: 'All Prakriti' }, ...Object.entri
 const NO_FILTERS: PatientFilters = { query: '', status: 'all', prakriti: 'all' };
 
 export function PatientsPage() {
-  const queryClient = useQueryClient();
   const navigate = useNavigate();
   const { data, isLoading } = usePatientsList();
   const patients = useMemo(() => data?.data ?? [], [data]);
@@ -54,11 +53,11 @@ export function PatientsPage() {
   const deleteMutation = usePatientsDelete({
     mutation: {
       onSuccess: (_res, { patientId }) => {
-        queryClient.invalidateQueries({ queryKey: getPatientsListQueryKey() });
         toast({ message: `${toDelete?.full_name ?? patientId} deleted`, severity: 'success' });
         setToDelete(null);
       },
-      onError: () => toast({ message: 'Could not delete the patient. Try again.', severity: 'error' }),
+      onError: (err) =>
+        toast({ message: errorMessage(err, 'Could not delete the patient. Try again.'), severity: 'error' }),
     },
   });
 
@@ -90,19 +89,17 @@ export function PatientsPage() {
 
   return (
     <div className="mx-auto max-w-7xl p-4 md:p-6">
-      <header className="mb-5 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-        <div>
-          <h1 className="text-2xl font-semibold text-foreground">Patients</h1>
-          <p className="text-sm text-muted-foreground">
-            {isLoading
-              ? 'Loading your register…'
-              : `${patients.length} registered · ${withAllergies} with known allergies`}
-          </p>
-        </div>
-        <CustomButton icon={<Plus className="size-4" />} onClick={openAdd} className="self-start sm:self-auto">
-          Add patient
-        </CustomButton>
-      </header>
+      <PageHeader
+        title="Patients"
+        description={
+          isLoading ? 'Loading your register…' : `${patients.length} registered · ${withAllergies} with known allergies`
+        }
+        actions={
+          <CustomButton icon={<Plus className="size-4" />} onClick={openAdd}>
+            Add patient
+          </CustomButton>
+        }
+      />
 
       <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <p className="text-sm text-muted-foreground" aria-live="polite">

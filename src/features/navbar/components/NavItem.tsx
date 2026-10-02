@@ -30,17 +30,17 @@ export const NavItem = memo(function NavItem({ label, path, icon }: NavItemProps
       }}
       aria-current={isActive ? 'page' : undefined}
       className={cn(
-        'inline-flex items-center gap-2 whitespace-nowrap rounded-md px-3 py-1.5 text-sm font-medium transition-colors md:px-3 md:text-[15px] lg:px-4 lg:text-base',
-        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0',
-        isActive
-          ? 'border border-transparent bg-primary-00 font-semibold text-primary-07'
-          : 'border border-transparent text-neutral-70 hover:bg-muted hover:text-foreground',
+        // Sits on the shell band: light text, and a copper bar along the band's bottom edge marks the current page.
+        'relative inline-flex h-16 items-center gap-2 whitespace-nowrap px-3 text-base transition-colors lg:px-4',
+        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-shell-foreground',
+        isActive ? 'font-semibold text-white' : 'font-medium text-shell-foreground/85 hover:bg-white/10 hover:text-white',
       )}
     >
-      <span aria-hidden className="inline-flex size-4 items-center justify-center">
+      <span aria-hidden className="inline-flex size-[18px] items-center justify-center">
         {icon}
       </span>
       {label}
+      {isActive && <span aria-hidden className="absolute inset-x-3 bottom-0 h-[3px] rounded-t-sm bg-accent-30 lg:inset-x-4" />}
     </button>
   );
 });

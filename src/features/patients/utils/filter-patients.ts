@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import { normalizeIndianPhone } from '../../../utils/phone';
-import type { Patient, PatientStatus, Prakriti } from '../api/patients-stubs';
+import type { Patient, PatientStatus, Prakriti } from '../api/patients';
 
 export interface PatientFilters {
   query: string;

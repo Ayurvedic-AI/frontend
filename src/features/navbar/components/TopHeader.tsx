@@ -13,7 +13,7 @@ interface TopHeaderProps {
 export function TopHeader({ navLinks, onOpenNav }: TopHeaderProps) {
   return (
     <header
-      className="sticky top-0 z-20 flex h-16 items-center gap-3 border-b border-border bg-background px-4 text-foreground md:gap-8 md:px-6"
+      className="sticky top-0 z-20 flex h-16 items-center gap-3 bg-shell px-4 text-shell-foreground md:gap-8 md:px-6"
       data-slot="top-header"
     >
       {/* Mobile menu trigger */}
@@ -21,15 +21,15 @@ export function TopHeader({ navLinks, onOpenNav }: TopHeaderProps) {
         type="button"
         onClick={onOpenNav}
         aria-label="Open navigation menu"
-        className="inline-flex size-10 items-center justify-center rounded-md text-muted-foreground hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring md:hidden"
+        className="inline-flex size-10 items-center justify-center rounded-md text-shell-foreground hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shell-foreground md:hidden"
       >
         <Menu aria-hidden className="size-5" />
       </button>
 
-      <BrandLogo size="sm" className="shrink-0" />
+      <BrandLogo size="sm" inverted className="shrink-0" />
 
       <nav aria-label="Primary" className="hidden min-w-0 flex-1 overflow-x-auto md:block">
-        <ul className="flex items-center gap-1">
+        <ul className="flex items-center">
           {navLinks.map((link) => (
             <li key={link.path}>
               <NavItem label={link.label} path={link.path} icon={link.icon} />

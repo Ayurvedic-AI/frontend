@@ -10,9 +10,9 @@ interface AuthLayoutProps {
 }
 
 const HIGHLIGHTS: { icon: LucideIcon; title: string; text: string }[] = [
-  { icon: Mic, title: 'Voice Consultations', text: 'Record in Hindi, Marathi or English — transcribed and translated.' },
+  { icon: Mic, title: 'Voice consultations', text: 'Record in Hindi, Marathi or English — transcribed and translated.' },
   { icon: Stethoscope, title: 'Ashtavidha Pariksha', text: 'Guided eight-fold examination with red-flag screening.' },
-  { icon: BookOpen, title: 'Classical References', text: 'Relevant Charaka Samhita verses for every case.' },
+  { icon: BookOpen, title: 'Classical references', text: 'Relevant Charaka Samhita verses for every case.' },
 ];
 
 /**
@@ -28,7 +28,7 @@ export function AuthLayout({ imageSrc, imageAlt = '', children }: AuthLayoutProp
         {imageSrc ? (
           <img src={imageSrc} alt={imageAlt} className="absolute inset-0 h-full w-full object-cover" />
         ) : (
-          <div className="flex h-full flex-col justify-between bg-gradient-to-br from-primary via-primary-08 to-primary-10 p-10 text-white lg:p-14">
+          <div className="flex h-full flex-col justify-between bg-shell p-10 text-white lg:p-14">
             <BrandLogo size="md" inverted />
             <div className="max-w-md">
               <h2 className="text-3xl font-semibold leading-tight lg:text-4xl">
@@ -54,7 +54,7 @@ export function AuthLayout({ imageSrc, imageAlt = '', children }: AuthLayoutProp
       </aside>
       <section
         data-slot="form-pane"
-        className="flex w-full flex-col bg-background px-6 py-8 sm:px-8 md:w-1/2 lg:px-16"
+        className="flex w-full flex-col bg-page px-6 py-8 sm:px-8 md:w-1/2 lg:px-16"
       >
         <BrandLogo size="md" className="mb-4 self-start" />
         <div className="mx-auto flex w-full max-w-[520px] flex-1 flex-col justify-center">

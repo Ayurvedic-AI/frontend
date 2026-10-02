@@ -92,7 +92,7 @@ export function SignInPage() {
           <RHFCheckbox<SignInFormValues>
             name="rememberMe"
             control={control}
-            label="Remember Me"
+            label="Remember me"
             size="sm"
           />
           <button
@@ -100,7 +100,7 @@ export function SignInPage() {
             onClick={() => navigate('/forgot-password')}
             className="text-sm font-medium text-primary hover:underline"
           >
-            Forgot Password?
+            Forgot password?
           </button>
         </div>
 

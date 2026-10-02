@@ -2,6 +2,7 @@ import { startTransition, type ReactNode } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { CustomDrawer } from '../../../common/custom-drawer';
 import { cn } from '../../../lib/cn';
+import { isNavPathActive } from '../nav-links';
 
 interface NavLink {
   label: string;
@@ -29,14 +30,14 @@ export function MobileDrawer({ open, onClose, navLinks }: MobileDrawerProps) {
       anchor="left"
       open={open}
       onClose={onClose}
-      title=""
+      title="Menu"
       drawerWidth="80vw"
       className="bg-white text-foreground"
     >
       <nav className="-mx-6 pt-2" aria-label="Mobile primary navigation">
         <ul className="flex flex-col">
           {navLinks.map((link) => {
-            const isActive = location.pathname.startsWith(link.path);
+            const isActive = isNavPathActive(location.pathname, link.path);
             return (
               <li key={link.path}>
                 <button
@@ -54,7 +55,12 @@ export function MobileDrawer({ open, onClose, navLinks }: MobileDrawerProps) {
                   <span aria-hidden className="inline-flex size-5 items-center justify-center">
                     {link.icon}
                   </span>
-                  {link.label}
+                  <span className="relative">
+                    {link.label}
+                    {isActive && (
+                      <span aria-hidden className="absolute inset-x-0 -bottom-1.5 h-[3px] rounded-full bg-accent" />
+                    )}
+                  </span>
                 </button>
               </li>
             );

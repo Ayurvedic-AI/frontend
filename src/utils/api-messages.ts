@@ -8,6 +8,14 @@ export function errorMessage(error: unknown, fallback = 'Something went wrong.')
   if (error instanceof ApiError) {
     const detail = (error as unknown as { body?: { detail?: unknown } }).body?.detail;
     if (typeof detail === 'string') return detail;
+    // FastAPI validation errors: { detail: [{ loc: ['body', 'phone'], msg: 'Field required' }, …] }
+    if (Array.isArray(detail)) {
+      const first = detail[0] as { loc?: unknown[]; msg?: unknown } | undefined;
+      if (typeof first?.msg === 'string') {
+        const field = Array.isArray(first.loc) ? first.loc.filter((p) => p !== 'body').join('.') : '';
+        return field ? `${field}: ${first.msg}` : first.msg;
+      }
+    }
   }
   return fallback;
 }

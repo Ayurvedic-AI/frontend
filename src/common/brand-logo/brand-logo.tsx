@@ -1,4 +1,4 @@
-import { Leaf } from 'lucide-react';
+import { Amphora } from 'lucide-react';
 import { cn } from '../../lib/cn';
 
 export interface BrandLogoProps {
@@ -25,7 +25,7 @@ export function BrandLogo({ size = 'md', iconOnly, inverted, className }: BrandL
           MARK[size],
         )}
       >
-        <Leaf aria-hidden className={ICON[size]} />
+        <Amphora aria-hidden className={ICON[size]} />
       </span>
       {!iconOnly && (
         <span

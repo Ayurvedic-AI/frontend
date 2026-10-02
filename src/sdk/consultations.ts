@@ -12,8 +12,13 @@ import type {
   UseMutationResult
 } from '@tanstack/react-query';
 
+import type {
+  ConsultationIn,
+  HTTPValidationError
+} from './schemas';
+
 import { mutator } from '../api/sdk-mutator';
-import type { ErrorType } from '../api/sdk-mutator';
+import type { ErrorType , BodyType } from '../api/sdk-mutator';
 
 
 
@@ -24,12 +29,19 @@ export type createConsultationResponse200 = {
   status: 200
 }
 
+export type createConsultationResponse422 = {
+  data: HTTPValidationError
+  status: 422
+}
+
 export type createConsultationResponseSuccess = (createConsultationResponse200) & {
   headers: Headers;
 };
-;
+export type createConsultationResponseError = (createConsultationResponse422) & {
+  headers: Headers;
+};
 
-export type createConsultationResponse = (createConsultationResponseSuccess)
+export type createConsultationResponse = (createConsultationResponseSuccess | createConsultationResponseError)
 
 export const getCreateConsultationUrl = () => {
 
@@ -42,23 +54,23 @@ export const getCreateConsultationUrl = () => {
 /**
  * @summary Create Consultation
  */
-export const createConsultation = async ( options?: RequestInit): Promise<createConsultationResponse> => {
+export const createConsultation = async (consultationInNull?: ConsultationIn | null, options?: RequestInit): Promise<createConsultationResponse> => {
 
   return mutator<createConsultationResponse>(getCreateConsultationUrl(),
   {
     ...options,
-    method: 'POST'
-
-
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(consultationInNull)
   }
 );}
 
 
 
 
-export const getCreateConsultationMutationOptions = <TError = ErrorType<unknown>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createConsultation>>, TError,void, TContext>, }
-): UseMutationOptions<Awaited<ReturnType<typeof createConsultation>>, TError,void, TContext> => {
+export const getCreateConsultationMutationOptions = <TError = ErrorType<HTTPValidationError>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createConsultation>>, TError,{data?: BodyType<ConsultationIn | null>}, TContext>, }
+): UseMutationOptions<Awaited<ReturnType<typeof createConsultation>>, TError,{data?: BodyType<ConsultationIn | null>}, TContext> => {
 
 const mutationKey = ['createConsultation'];
 const {mutation: mutationOptions} = options ?
@@ -70,10 +82,10 @@ const {mutation: mutationOptions} = options ?
 
 
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof createConsultation>>, void> = () => {
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof createConsultation>>, {data?: BodyType<ConsultationIn | null>}> = (props) => {
+          const {data} = props ?? {};
 
-
-          return  createConsultation()
+          return  createConsultation(data,)
         }
 
 
@@ -84,18 +96,18 @@ const {mutation: mutationOptions} = options ?
   return  { mutationFn, ...mutationOptions }}
 
     export type CreateConsultationMutationResult = NonNullable<Awaited<ReturnType<typeof createConsultation>>>
-
-    export type CreateConsultationMutationError = ErrorType<unknown>
+    export type CreateConsultationMutationBody = BodyType<ConsultationIn | null> | undefined
+    export type CreateConsultationMutationError = ErrorType<HTTPValidationError>
 
     /**
  * @summary Create Consultation
  */
-export const useCreateConsultation = <TError = ErrorType<unknown>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createConsultation>>, TError,void, TContext>, }
+export const useCreateConsultation = <TError = ErrorType<HTTPValidationError>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createConsultation>>, TError,{data?: BodyType<ConsultationIn | null>}, TContext>, }
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof createConsultation>>,
         TError,
-        void,
+        {data?: BodyType<ConsultationIn | null>},
         TContext
       > => {
       return useMutation(getCreateConsultationMutationOptions(options), queryClient);

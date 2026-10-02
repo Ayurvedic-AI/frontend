@@ -4,7 +4,7 @@ import { ActionMenu } from '../../../common/action-menu';
 import type { ColumnDef } from '../../../common/common-table';
 import { formatDate } from '../../../utils/format';
 import { formatIndianPhone } from '../../../utils/phone';
-import { GENDER_LABEL, PRAKRITI_LABEL, type Patient } from '../api/patients-stubs';
+import { GENDER_LABEL, PRAKRITI_LABEL, type Patient } from '../api/patients';
 import { ageInYears } from '../utils/filter-patients';
 import { AllergyPills } from './AllergyPills';
 

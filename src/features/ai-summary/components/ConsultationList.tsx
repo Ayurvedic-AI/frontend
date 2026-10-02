@@ -14,7 +14,7 @@ interface ConsultationListProps {
 export function ConsultationList({ consultations, patients, selectedId }: ConsultationListProps) {
   return (
     <nav aria-label="Consultations" className="overflow-hidden rounded-lg border border-border bg-card">
-      <h2 className="border-b border-border px-4 py-3 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+      <h2 className="border-b border-border px-4 py-3 text-sm font-semibold text-foreground">
         Recent consultations
       </h2>
       <ul>

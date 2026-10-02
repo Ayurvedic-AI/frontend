@@ -27,7 +27,7 @@ export const NAV_GROUPS: NavGroup[] = [
     links: [
       { label: 'Dashboard', path: '/dashboard', icon: <Home className={ICON} /> },
       { label: 'Patients', path: '/patients', icon: <Users className={ICON} /> },
-      { label: 'AI Summary', path: '/ai-summary', icon: <Sparkles className={ICON} /> },
+      { label: 'AI summary', path: '/ai-summary', icon: <Sparkles className={ICON} /> },
     ],
   },
 ];

@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import { describe, expect, it } from 'vitest';
-import type { Patient } from '../api/patients-stubs';
+import type { Patient } from '../api/patients';
 import { ageInYears, filterPatients } from '../utils/filter-patients';
 
 const p = (over: Partial<Patient>): Patient =>

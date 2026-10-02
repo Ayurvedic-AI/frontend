@@ -88,7 +88,7 @@ const Paginator = ({
         <span className="font-semibold text-foreground">
           {startRecord}-{endRecord}
         </span>{' '}
-        of <span className="font-semibold text-foreground">{totalRecord}</span> Rows
+        of <span className="font-semibold text-foreground">{totalRecord}</span> rows
       </p>
 
       <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:items-center" data-slot="controls">

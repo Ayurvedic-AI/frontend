@@ -7,4 +7,4 @@ export {
   LANGUAGE_LABEL,
   PRAKRITI_LABEL,
   type Patient,
-} from './api/patients-stubs';
+} from './api/patients';

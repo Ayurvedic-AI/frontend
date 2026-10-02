@@ -18,7 +18,13 @@ const Fact = ({ label, children }: { label: string; children: ReactNode }) => (
 
 /** Who this consultation is for, with the patient's safety facts always in view. */
 export function PatientStrip({ patient, consultationId, createdAt }: { patient: Patient; consultationId: number; createdAt: string }) {
-  const list = (items: string[]) => (items.length ? items.join(', ') : <span className="text-muted-foreground">None recorded</span>);
+  // Keep doses together ("5 mg" never splits across lines).
+  const list = (items: string[]) =>
+    items.length ? (
+      items.join(', ').replace(/(\d) (?=(mg|mcg|ml|g|IU)\b)/g, '$1\u00a0')
+    ) : (
+      <span className="text-muted-foreground">None recorded</span>
+    );
   return (
     <section aria-label="Patient" className="rounded-lg border border-border bg-card p-5">
       <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">

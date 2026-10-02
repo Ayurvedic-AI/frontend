@@ -48,7 +48,7 @@ export const UserMenu = memo(function UserMenu() {
             aria-label="User menu"
             className={cn(
               'inline-flex items-center gap-1 rounded-full p-0.5',
-              'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+              'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shell-foreground',
             )}
           >
             <UserAvatar
@@ -56,8 +56,10 @@ export const UserMenu = memo(function UserMenu() {
               lastName={initialsLast}
               size={32}
               variant="soft"
+              // Opaque on the shell band; the soft variant's 10% tint vanishes on teal.
+              className="bg-primary-00 text-primary-08"
             />
-            <ChevronDown aria-hidden className="size-4 text-muted-foreground" />
+            <ChevronDown aria-hidden className="size-4 text-shell-muted" />
           </button>
         </DropdownMenuPrimitive.Trigger>
         <DropdownMenuPrimitive.Portal>

@@ -12,6 +12,7 @@ export function SummarySection({ title, hint, children }: SummarySectionProps) {
   return (
     <section className="rounded-lg border border-border bg-card p-5" aria-label={title}>
       <header className="mb-4">
+        <span aria-hidden className="mb-2.5 block h-[3px] w-6 rounded-full bg-accent" />
         <h2 className="text-lg font-semibold text-foreground">{title}</h2>
         {hint && <p className="mt-0.5 text-xs text-muted-foreground">{hint}</p>}
       </header>

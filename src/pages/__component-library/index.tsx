@@ -2,6 +2,8 @@ import { P1Demo } from './p1';
 import { P2Demo } from './p2';
 import { P3Demo } from './p3';
 import { P4Demo } from './p4';
+import { PageHeader } from '../../common/page-header';
+import { CustomButton } from '../../common/custom-buttons';
 
 /**
  * Dev-only component library page. Gated behind `import.meta.env.DEV` in
@@ -24,6 +26,17 @@ export default function ComponentLibraryPage() {
         </div>
       </header>
       <main className="mx-auto max-w-7xl space-y-16 px-4 py-8 sm:px-6 lg:px-8">
+        <section className="space-y-4">
+          <h2 className="text-xl font-semibold">Page header</h2>
+          <div className="rounded-lg border border-border bg-page p-6">
+            <PageHeader
+              title="Patients"
+              description="14 registered · 6 with known allergies"
+              actions={<CustomButton>Add patient</CustomButton>}
+              className="mb-0"
+            />
+          </div>
+        </section>
         <P1Demo />
         <div className="border-t border-border pt-12">
           <P2Demo />

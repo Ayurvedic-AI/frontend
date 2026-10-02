@@ -3,7 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import dayjs from 'dayjs';
 import { emailOptional, phoneRequired, zipOptional } from '../../../utils/validation';
-import type { Patient, PatientInput } from '../api/patients-stubs';
+import type { Patient, PatientInput } from '../api/patients';
 
 // Selects hold plain strings; the enum check happens here so the error shows on the field.
 const oneOf = (values: readonly string[], message: string) =>

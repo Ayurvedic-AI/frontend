@@ -33,6 +33,7 @@ export * from './date-picker-field';
 export * from './time-picker-field';
 export * from './custom-fileupload';
 export * from './brand-logo';
+export * from './page-header';
 export * from './multiple-files-upload';
 export * from './signature-canvas';
 

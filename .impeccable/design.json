@@ -4,20 +4,35 @@
   "title": "Design System: Ayurveda AI",
   "extensions": {
     "colorMeta": {
-      "primary": { "role": "primary", "displayName": "Herbal Green", "canonical": "#2E7040", "tonalRamp": ["#0E2214", "#1A3B24", "#1F482B", "#255A34", "#2E7040", "#3D8B50", "#8FC59A", "#F0F7F1"] },
-      "accent": { "role": "tertiary", "displayName": "Turmeric Amber", "canonical": "#F59E0B" },
-      "foreground": { "role": "neutral", "displayName": "Stone Ink", "canonical": "#1C1917" },
-      "muted-foreground": { "role": "neutral", "displayName": "Warm Stone Grey", "canonical": "#78716C" },
-      "border": { "role": "neutral", "displayName": "Stone Hairline", "canonical": "#E7E5E4" },
-      "destructive": { "role": "status", "displayName": "Safety Red", "canonical": "#DC2626", "tonalRamp": ["#991B1B", "#B91C1C", "#DC2626", "#EF4444", "#F87171", "#FCA5A5", "#FECACA", "#FEF2F2"] }
+      "primary": { "role": "primary", "displayName": "Verdigris Teal", "canonical": "#12676E", "tonalRamp": ["#072A2E", "#0B3D42", "#0E4F55", "#12676E", "#2A8288", "#4F9E9B", "#B2D8D5", "#EEF6F5"] },
+      "shell": { "role": "primary", "displayName": "Deep Verdigris Band", "canonical": "#0E4F55" },
+      "secondary": { "role": "primary", "displayName": "Patina Wash", "canonical": "#EEF6F5" },
+      "accent": { "role": "secondary", "displayName": "Copper", "canonical": "#B8662E", "tonalRamp": ["#3A1F0F", "#592F16", "#77401D", "#985224", "#B8662E", "#D99D6E", "#F4E0CF", "#FBF3EC"] },
+      "accent-30": { "role": "secondary", "displayName": "Pale Copper (on band)", "canonical": "#D99D6E" },
+      "page": { "role": "neutral", "displayName": "Warm White Page", "canonical": "#FBFAF7" },
+      "foreground": { "role": "neutral", "displayName": "Ink", "canonical": "#17181F", "tonalRamp": ["#0C0C10", "#17181F", "#2E2C29", "#45423D", "#5E5A54", "#A9A39A", "#E6E2DA", "#FBFAF7"] },
+      "muted-foreground": { "role": "neutral", "displayName": "Warm Label Grey", "canonical": "#5E5A54" },
+      "border": { "role": "neutral", "displayName": "Warm Hairline", "canonical": "#E6E2DA" },
+      "destructive": { "role": "status", "displayName": "Red Flag Red", "canonical": "#C62828", "tonalRamp": ["#8A1A1A", "#A61F1F", "#C62828", "#D43F3F", "#E06B6B", "#EC9A9A", "#F5C2C2", "#FDF2F2"] },
+      "warning": { "role": "status", "displayName": "Caution Amber", "canonical": "#C27C0E" },
+      "positive": { "role": "status", "displayName": "Leaf Green", "canonical": "#2E7D32" },
+      "info": { "role": "status", "displayName": "Info Blue", "canonical": "#1F6FA8" }
     },
     "typographyMeta": {
-      "page-title": { "displayName": "Page title", "purpose": "Inter 600, 24/32. One per screen." },
-      "body": { "displayName": "Body", "purpose": "Inter 400, 14/20. Tables and form fields." },
-      "caption": { "displayName": "Helper", "purpose": "Inter 400, 12/16, muted. Sub-lines, hints, empty values." }
+      "page-title": { "displayName": "Page title", "purpose": "Mukta 600, 24px (30px from md). One per screen, under the copper bar." },
+      "section-title": { "displayName": "Section title", "purpose": "Mukta 600, 18/28. Card, panel and summary section heads." },
+      "nav": { "displayName": "Nav", "purpose": "Mukta 500, 17/24 (600 active). Top-bar links on the teal band." },
+      "body": { "displayName": "Body", "purpose": "Mukta 400, 15/22. Tables, fields, list rows." },
+      "label": { "displayName": "Helper", "purpose": "Mukta 400, 13/18, muted. Sub-lines, hints, empty values, pills." },
+      "table-header": { "displayName": "Table header", "purpose": "Mukta 600, 13/18, uppercase, tracking-wide, muted. CommonTable column heads only." }
     },
-    "shadows": [],
-    "motion": [],
+    "shadows": [
+      { "name": "floating", "value": "0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1)", "purpose": "shadow-lg: menus, popovers, drawers, dialogs only." },
+      { "name": "sticky-column-edge", "value": "-6px 0 6px -6px rgba(0,0,0,0.08)", "purpose": "Pinned actions column in CommonTable." }
+    ],
+    "motion": [
+      { "name": "color-transition", "value": "color, background-color 150ms cubic-bezier(0.4, 0, 0.2, 1)", "purpose": "transition-colors on buttons, nav items and row hovers." }
+    ],
     "breakpoints": [
       { "name": "sm", "value": "640px" },
       { "name": "md", "value": "768px" },
@@ -29,56 +44,113 @@
     {
       "name": "Primary Button",
       "kind": "button",
-      "refersTo": "CustomButton variant=primary",
-      "description": "The one primary action per screen (e.g. Add patient).",
-      "html": "<button class=\"ds-btn-primary\">Add patient</button>",
-      "css": ".ds-btn-primary { display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 16px; border: none; border-radius: 8px; background: var(--color-primary, #2E7040); color: var(--color-primary-foreground, #fff); font: 500 16px/1 Inter, system-ui, sans-serif; cursor: pointer; transition: background-color .15s; } .ds-btn-primary:hover { background: color-mix(in srgb, var(--color-primary, #2E7040) 90%, transparent); } .ds-btn-primary:focus-visible { outline: none; box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-ring, #2E7040) 50%, transparent); }"
+      "refersTo": "button-primary",
+      "description": "The one primary action per screen region (e.g. Add patient).",
+      "html": "<button class=\"ds-btn-primary\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"><path d=\"M5 12h14\"/><path d=\"M12 5v14\"/></svg>Add patient</button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 16px; border: none; border-radius: 8px; background: var(--color-primary, #12676E); color: var(--color-primary-foreground, #fff); font: 500 17px/1 Mukta, 'Noto Sans Devanagari', system-ui, sans-serif; cursor: pointer; transition: background-color .15s; } .ds-btn-primary:hover { background: color-mix(in srgb, var(--color-primary, #12676E) 90%, transparent); } .ds-btn-primary:focus-visible { outline: none; box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-ring, #12676E) 50%, transparent); }"
     },
     {
       "name": "Outline Button",
       "kind": "button",
-      "refersTo": "CustomButton variant=outline",
+      "refersTo": "button-outline",
       "description": "Secondary actions such as Cancel.",
       "html": "<button class=\"ds-btn-outline\">Cancel</button>",
-      "css": ".ds-btn-outline { height: 40px; padding: 0 16px; border: 1px solid var(--color-input, #D6D3D1); border-radius: 8px; background: var(--color-background, #fff); color: var(--color-foreground, #1C1917); font: 500 16px/1 Inter, system-ui, sans-serif; cursor: pointer; transition: background-color .15s; } .ds-btn-outline:hover { background: var(--color-secondary, #F0F7F1); color: var(--color-secondary-foreground, #1A3B24); } .ds-btn-outline:focus-visible { outline: none; box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-ring, #2E7040) 50%, transparent); }"
+      "css": ".ds-btn-outline { height: 40px; padding: 0 16px; border: 1px solid var(--color-input, #CFC9BE); border-radius: 8px; background: var(--color-background, #fff); color: var(--color-foreground, #17181F); font: 500 17px/1 Mukta, 'Noto Sans Devanagari', system-ui, sans-serif; cursor: pointer; transition: background-color .15s, color .15s; } .ds-btn-outline:hover { background: var(--color-secondary, #EEF6F5); color: var(--color-secondary-foreground, #0B3D42); } .ds-btn-outline:focus-visible { outline: none; box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-ring, #12676E) 50%, transparent); }"
     },
     {
-      "name": "Top Nav Item",
+      "name": "Text Input",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "CustomInput field: 44px, white, warm stroke, teal focus.",
+      "html": "<label class=\"ds-field\"><span class=\"ds-field-label\">Email <span class=\"ds-req\">*</span></span><span class=\"ds-input\"><input placeholder=\"Enter email\"></span></label>",
+      "css": ".ds-field { display: flex; flex-direction: column; gap: 6px; font-family: Mukta, 'Noto Sans Devanagari', system-ui, sans-serif; } .ds-field-label { font-size: 15px; font-weight: 500; color: var(--color-foreground, #17181F); } .ds-req { color: var(--color-destructive, #C62828); } .ds-input { display: flex; align-items: center; padding: 0 12px; border: 1px solid var(--color-input, #CFC9BE); border-radius: 8px; background: var(--color-background, #fff); } .ds-input:focus-within { border-color: var(--color-ring, #12676E); box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-ring, #12676E) 40%, transparent); } .ds-input input { height: 44px; width: 100%; border: none; outline: none; background: transparent; font: 400 17px Mukta, system-ui, sans-serif; color: var(--color-foreground, #17181F); } .ds-input input::placeholder { color: var(--color-muted-foreground, #5E5A54); }"
+    },
+    {
+      "name": "Top Header",
       "kind": "nav",
-      "refersTo": "NavItem",
-      "description": "Primary nav link in the 64px top header; active is a green tint, not a fill.",
-      "html": "<nav class=\"ds-nav\"><a class=\"ds-nav-item\" aria-current=\"page\" href=\"#\">Patients</a><a class=\"ds-nav-item\" href=\"#\">Consultations</a></nav>",
-      "css": ".ds-nav { display: flex; gap: 4px; height: 64px; align-items: center; padding: 0 24px; border-bottom: 1px solid var(--color-border, #E7E5E4); background: var(--color-background, #fff); } .ds-nav-item { padding: 6px 16px; border-radius: 8px; font: 500 16px/24px Inter, system-ui, sans-serif; color: var(--color-neutral-70, #292524); text-decoration: none; transition: background-color .15s; } .ds-nav-item:hover { background: var(--color-muted, #F5F5F4); color: var(--color-foreground, #1C1917); } .ds-nav-item[aria-current=page] { background: var(--color-primary-00, #F0F7F1); color: var(--color-primary-07, #255A34); font-weight: 600; } .ds-nav-item:focus-visible { outline: none; box-shadow: 0 0 0 2px var(--color-ring, #2E7040); }"
+      "refersTo": "top-header",
+      "description": "Teal band, 64px. Active link is white with a pale copper (accent-30) bar on the band's bottom edge.",
+      "html": "<nav class=\"ds-band\"><span class=\"ds-band-brand\">Ayurveda AI</span><a class=\"ds-band-item\" href=\"#\">Dashboard</a><a class=\"ds-band-item\" aria-current=\"page\" href=\"#\">Patients</a><a class=\"ds-band-item\" href=\"#\">AI summary</a></nav>",
+      "css": ".ds-band { display: flex; align-items: center; height: 64px; padding: 0 24px; gap: 0; background: var(--color-shell, #0E4F55); color: var(--color-shell-foreground, #E6F0EF); font-family: Mukta, 'Noto Sans Devanagari', system-ui, sans-serif; } .ds-band-brand { font-weight: 600; color: #fff; margin-right: 32px; } .ds-band-item { position: relative; display: inline-flex; align-items: center; height: 64px; padding: 0 16px; font-size: 17px; font-weight: 500; color: color-mix(in srgb, var(--color-shell-foreground, #E6F0EF) 85%, transparent); text-decoration: none; transition: background-color .15s, color .15s; } .ds-band-item:hover { background: rgba(255,255,255,.1); color: #fff; } .ds-band-item:focus-visible { outline: none; box-shadow: inset 0 0 0 2px var(--color-shell-foreground, #E6F0EF); } .ds-band-item[aria-current=page] { color: #fff; font-weight: 600; } .ds-band-item[aria-current=page]::after { content: ''; position: absolute; left: 16px; right: 16px; bottom: 0; height: 3px; border-radius: 2px 2px 0 0; background: var(--color-accent-30, #D99D6E); }"
     },
     {
-      "name": "Safety Pill",
+      "name": "Page Header",
+      "kind": "custom",
+      "refersTo": "page-title-bar",
+      "description": "Copper bar, title, one-line description, primary action right. The copper bar is the signature 'you are here' mark.",
+      "html": "<header class=\"ds-ph\"><div><span class=\"ds-ph-bar\"></span><h1>Patients</h1><p>14 registered · 6 with known allergies</p></div></header>",
+      "css": ".ds-ph { padding: 24px; background: var(--color-page, #FBFAF7); font-family: Mukta, 'Noto Sans Devanagari', system-ui, sans-serif; } .ds-ph-bar { display: block; width: 32px; height: 3px; margin-bottom: 12px; border-radius: 9999px; background: var(--color-accent, #B8662E); } .ds-ph h1 { margin: 0; font-size: 30px; line-height: 1.25; font-weight: 600; color: var(--color-foreground, #17181F); } .ds-ph p { margin: 4px 0 0; font-size: 15px; line-height: 22px; color: var(--color-muted-foreground, #5E5A54); }"
+    },
+    {
+      "name": "Allergy Pill",
       "kind": "chip",
-      "refersTo": "AllergyPills",
-      "description": "One pill per allergy; wraps, never truncates. Empty list reads \"None recorded\" in muted text.",
-      "html": "<ul class=\"ds-pills\"><li class=\"ds-pill-safety\">Penicillin</li><li class=\"ds-pill-safety\">Sesame</li></ul>",
-      "css": ".ds-pills { display: flex; flex-wrap: wrap; gap: 4px; margin: 0; padding: 0; list-style: none; } .ds-pill-safety { padding: 2px 8px; border-radius: 9999px; background: var(--color-destructive-01, #FEF2F2); color: var(--color-destructive-70, #991B1B); font: 500 12px/16px Inter, system-ui, sans-serif; }"
+      "refersTo": "allergy-pill",
+      "description": "Amber caution pill with drawn alert icon; one per allergy, wraps, never truncates. Empty list reads 'None recorded' in muted text.",
+      "html": "<ul class=\"ds-pills\"><li class=\"ds-pill-caution\"><svg width=\"12\" height=\"12\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3\"/><path d=\"M12 9v4\"/><path d=\"M12 17h.01\"/></svg>Penicillin</li><li class=\"ds-pill-caution\"><svg width=\"12\" height=\"12\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3\"/><path d=\"M12 9v4\"/><path d=\"M12 17h.01\"/></svg>Sulfa drugs</li></ul>",
+      "css": ".ds-pills { display: flex; flex-wrap: wrap; gap: 4px; margin: 0; padding: 0; list-style: none; } .ds-pill-caution { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 9999px; background: var(--color-warning-01, #FEF8E7); color: var(--color-warning-60, #8F5B08); box-shadow: inset 0 0 0 1px var(--color-warning-05, #FCEDC2); font: 500 13px/18px Mukta, 'Noto Sans Devanagari', system-ui, sans-serif; }"
+    },
+    {
+      "name": "Summary Section Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Bordered white card with a short copper bar above the heading.",
+      "html": "<section class=\"ds-card\"><span class=\"ds-card-bar\"></span><h2>Ashtavidha Pariksha</h2><p class=\"ds-card-hint\">From the examination form</p><p class=\"ds-card-body\">Nadi: Vata-Pitta, irregular.</p></section>",
+      "css": ".ds-card { padding: 20px; border: 1px solid var(--color-border, #E6E2DA); border-radius: 12px; background: var(--color-card, #fff); font-family: Mukta, 'Noto Sans Devanagari', system-ui, sans-serif; } .ds-card-bar { display: block; width: 24px; height: 3px; margin-bottom: 10px; border-radius: 9999px; background: var(--color-accent, #B8662E); } .ds-card h2 { margin: 0; font-size: 18px; line-height: 28px; font-weight: 600; color: var(--color-foreground, #17181F); } .ds-card-hint { margin: 2px 0 16px; font-size: 13px; line-height: 18px; color: var(--color-muted-foreground, #5E5A54); } .ds-card-body { margin: 0; font-size: 15px; line-height: 22px; color: var(--color-foreground, #17181F); }"
+    },
+    {
+      "name": "Red Flag Banner",
+      "kind": "custom",
+      "refersTo": "red-flag-banner",
+      "description": "Triage alert at the top of the summary; never collapsible. Red appears only here, in red-flag pills, errors and delete.",
+      "html": "<div class=\"ds-redflag\" role=\"alert\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3\"/><path d=\"M12 9v4\"/><path d=\"M12 17h.01\"/></svg><div><p class=\"ds-redflag-title\">Red flags: chest pain, breathlessness</p><p class=\"ds-redflag-advice\">Refer for emergency evaluation today.</p></div></div>",
+      "css": ".ds-redflag { display: flex; gap: 12px; padding: 16px; border: 1px solid var(--color-destructive-10, #F5C2C2); border-radius: 12px; background: var(--color-destructive-01, #FDF2F2); color: var(--color-destructive-70, #8A1A1A); font-family: Mukta, 'Noto Sans Devanagari', system-ui, sans-serif; } .ds-redflag svg { flex-shrink: 0; margin-top: 2px; } .ds-redflag p { margin: 0; } .ds-redflag-title { font-weight: 600; font-size: 17px; } .ds-redflag-advice { margin-top: 4px !important; font-size: 15px; }"
     },
     {
       "name": "Register Primary Cell",
       "kind": "custom",
-      "refersTo": "patient-columns full_name cell",
+      "refersTo": "CommonTable primary cell",
       "description": "Name plus a muted tabular sub-line of identifiers (Reg. No. · phone).",
-      "html": "<div class=\"ds-cell\"><p class=\"ds-cell-name\">Meera Kulkarni</p><p class=\"ds-cell-sub\">AY-0142 · +91 98220 41187</p></div>",
-      "css": ".ds-cell { font-family: Inter, system-ui, sans-serif; padding: 12px 16px; } .ds-cell p { margin: 0; } .ds-cell-name { font-size: 14px; line-height: 20px; font-weight: 500; color: var(--color-foreground, #1C1917); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; } .ds-cell-sub { font-size: 12px; line-height: 16px; color: var(--color-muted-foreground, #78716C); font-variant-numeric: tabular-nums; }"
+      "html": "<div class=\"ds-cell\"><p class=\"ds-cell-name\">Sunita Deshmukh</p><p class=\"ds-cell-sub\">AYU-0014 · +91 98234 56710</p></div>",
+      "css": ".ds-cell { font-family: Mukta, 'Noto Sans Devanagari', system-ui, sans-serif; padding: 12px 16px; background: var(--color-background, #fff); } .ds-cell p { margin: 0; } .ds-cell-name { font-size: 15px; line-height: 22px; font-weight: 500; color: var(--color-foreground, #17181F); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; } .ds-cell-sub { font-size: 13px; line-height: 18px; color: var(--color-muted-foreground, #5E5A54); font-variant-numeric: tabular-nums; }"
     }
   ],
   "narrative": {
+    "northStar": "The Copper Vessel and Its Patina",
+    "overview": "A deep verdigris teal holds the shell and every action, the way patina holds an old copper lota; a thin copper bar marks where you are. The world is Ayurvedic in material (teal, copper, warm white, an amphora mark) and modern in behaviour: flat, bordered, dense enough for a register, and read at a glance mid-consultation in a daylit clinic.\n\nThe screen is built in three layers: a full-width teal band at the top (brand, nav, user), a warm-white page canvas, and white bordered cards that carry the work. Colour is spent on actions and orientation, never on content surfaces. Red is held back so that when it appears it means a red flag or an error. The world refuses generic wellness green and grey SaaS with one blue accent.",
+    "keyCharacteristics": [
+      "Deep teal band (64px) as the top bar; no sidebar.",
+      "Teal for buttons, links, focus rings, selection and selected tints.",
+      "A 3px copper bar that marks the current place and nothing else.",
+      "Warm-white page, white cards, warm hairlines, near-black ink.",
+      "Mukta for Latin and Devanagari together; body steps up to 15px.",
+      "Borders over shadows; shadows only on floating layers."
+    ],
     "rules": [
-      { "name": "Status pill", "body": "Status pill = bg-<status>-01 text-<status>-70 (light tint + dark text). Never solid status fills in tables.", "section": "colors" },
-      { "name": "Safety pill", "body": "Safety pill (allergies) = bg-destructive-01 text-destructive-70 rounded-full text-xs font-medium, one pill per fact, wrapping, never truncated. An empty list reads quietly (text-xs text-muted-foreground, \"None recorded\").", "section": "colors" },
-      { "name": "Borders over shadows", "body": "Cards are border border-border bg-card. Shadows only for floating layers (menus, popovers, drawers).", "section": "elevation" }
+      { "name": "The Copper Bar Rule", "body": "Copper marks the current place only: the active nav item, the page title, and summary section heads, as a 3px bar. Never a fill, pill, badge, border, icon or text colour.", "section": "colors" },
+      { "name": "The Band Contrast Rule", "body": "On the teal band, copper is `accent-30`, not `accent`. Anything light on the band uses `shell-foreground`, `shell-muted` or white.", "section": "colors" },
+      { "name": "The Reserved Red Rule", "body": "Red appears only for red flags and errors (and destructive actions). If a screen shows red, something needs the vaidya's attention.", "section": "colors" },
+      { "name": "The Paper and Card Rule", "body": "The page canvas is `bg-page` warm white; every working surface (`bg-background`, `bg-card`) is pure white on top of it. Never put content directly on a tinted fill.", "section": "colors" },
+      { "name": "The Tokens Only Rule", "body": "No raw hex, no Tailwind palette classes (`text-green-700`), no inline colours in components. A colour change happens in `index.css` only. No dark mode yet.", "section": "colors" },
+      { "name": "The One Voice Rule", "body": "Mukta for Latin and Devanagari together; never introduce a second family or a separate Devanagari face for display.", "section": "typography" },
+      { "name": "The Sentence Case Rule", "body": "All UI copy is sentence case (\"Add patient\", \"AI summary\"). Uppercase is reserved for table column headers.", "section": "typography" },
+      { "name": "The Tabular Figures Rule", "body": "IDs, Reg. Nos., ages, times, dates and counts use `tabular-nums`.", "section": "typography" },
+      { "name": "The Borders Over Shadows Rule", "body": "Cards and panels are `border border-border bg-card` with no shadow. Shadows belong to things that float above the page.", "section": "elevation" }
     ],
     "dos": [
-      "Do reuse a `_reference/` pattern (e.g. a list page with drawer) by re-creating it with Ayurveda AI data.",
-      "Do keep copy short, sentence case (\"Add patient\", not \"ADD NEW PATIENT\")."
+      "Do use the copper bar only through `PageHeader`, `SummarySection` and the nav components.",
+      "Do use `accent-30` for copper on the teal band.",
+      "Do show allergies as amber caution pills with the drawn alert icon.",
+      "Do keep content on white cards over the `bg-page` canvas.",
+      "Do use `tabular-nums` for IDs, ages, times, dates and counts.",
+      "Do keep copy short and sentence case (\"Add patient\", not \"ADD NEW PATIENT\").",
+      "Do reuse a `_reference/` pattern (e.g. a list page with drawer) by re-creating it with Ayurveda AI data."
     ],
     "donts": [
-      "Don't invent one-off components, colors, spacings, or shadows.",
+      "Don't use copper as a fill, pill, badge, border or text colour.",
+      "Don't use red for anything but red flags, errors and delete.",
+      "Don't use the bar shape or copper for warnings; warnings stay amber tint pills.",
+      "Don't put shadows on cards or panels.",
+      "Don't invent one-off components, colours, spacings or shadows; no raw hex or palette classes.",
       "Don't put business logic in pages; hooks in `features/<x>/hooks`, helpers in `src/utils`."
     ]
   }
