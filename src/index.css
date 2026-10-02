@@ -1,0 +1,269 @@
+@import "tailwindcss";
+
+/**
+ * Design tokens — single source of truth for the Ayurveda AI colors,
+ * typography, radii, and shadows (documented in DESIGN.md). Consumed by Tailwind v4 via the
+ * @theme block — declaring a `--color-x` here auto-generates the
+ * matching `bg-x`, `text-x`, `border-x`, etc utilities.
+ *
+ * When the brand palette changes, this is the only file that changes.
+ */
+@theme {
+  /* ── Base surfaces: warm white page, white cards, near-black ink ───────── */
+  --color-page: #FBFAF7;                  /* page canvas behind cards (body) */
+  --color-background: #FFFFFF;            /* surfaces: inputs, drawers, menus, tables */
+  --color-foreground: #17181F;            /* ink */
+  --color-card: #FFFFFF;                  /* cards, inputs, dialogs, drawers */
+  --color-card-foreground: #17181F;
+
+  /* ── Shell band (top bar): deep verdigris ──────────────────────────────── */
+  --color-shell: #0E4F55;
+  --color-shell-foreground: #E6F0EF;      /* nav text on the band */
+  --color-shell-muted: #9CC3C1;           /* secondary text on the band */
+
+  /* ── Primary (verdigris teal): buttons, links, focus, selection ─────────── */
+  --color-primary: #12676E;
+  --color-primary-foreground: #FFFFFF;
+  --color-primary-00: #EEF6F5;
+  --color-primary-01: #D7EBE9;
+  --color-primary-02: #B2D8D5;
+  --color-primary-03: #82BEBA;
+  --color-primary-04: #4F9E9B;
+  --color-primary-05: #2A8288;
+  --color-primary-06: #12676E;
+  --color-primary-07: #0F5960;
+  --color-primary-08: #0E4F55;
+  --color-primary-09: #0B3D42;
+  --color-primary-10: #072A2E;
+  --color-primary-light: #B2D8D5;
+  --color-primary-dark: #0E4F55;
+
+  /* ── Secondary (soft teal tint for surfaces / outline hover) ──────────── */
+  --color-secondary: #EEF6F5;
+  --color-secondary-foreground: #0B3D42;
+
+  /* ── Accent (copper): the 3px "you are here" bar and rare highlights ──── */
+  --color-accent: #B8662E;
+  --color-accent-foreground: #FFFFFF;
+  --color-accent-01: #FFFFFF;
+  --color-accent-05: #FBF3EC;
+  --color-accent-10: #F4E0CF;
+  --color-accent-20: #E8C3A3;
+  --color-accent-30: #D99D6E;
+  --color-accent-40: #C77D47;
+  --color-accent-50: #B8662E;
+  --color-accent-60: #985224;
+  --color-accent-70: #77401D;
+  --color-accent-80: #592F16;
+  --color-accent-90: #3A1F0F;
+
+  /* ── Muted (helper text + subtle backgrounds) ──────────────────────────── */
+  --color-muted: #F3F1EC;
+  --color-muted-foreground: #5E5A54;      /* 6.6:1 on white, 6.3:1 on the page */
+
+  /* ── Destructive (red flags, errors, delete): red is reserved for these ── */
+  --color-destructive: #C62828;
+  --color-destructive-foreground: #FFFFFF;
+  --color-destructive-01: #FDF2F2;
+  --color-destructive-05: #FBE3E3;
+  --color-destructive-10: #F5C2C2;
+  --color-destructive-20: #EC9A9A;
+  --color-destructive-30: #E06B6B;
+  --color-destructive-40: #D43F3F;
+  --color-destructive-50: #C62828;
+  --color-destructive-60: #A61F1F;
+  --color-destructive-70: #8A1A1A;
+
+  /* ── Status palettes (pills, banners) ──────────────────────────────────── */
+  --color-positive: #2E7D32;
+  --color-positive-foreground: #FFFFFF;
+  --color-positive-01: #EFF7EF;
+  --color-positive-05: #D9EDDA;
+  --color-positive-50: #43A047;
+  --color-positive-60: #2E7D32;
+  --color-positive-70: #1B5E20;
+
+  --color-warning: #C27C0E;
+  --color-warning-foreground: #FFFFFF;
+  --color-warning-01: #FEF8E7;
+  --color-warning-05: #FCEDC2;
+  --color-warning-50: #C27C0E;
+  --color-warning-60: #8F5B08;
+
+  --color-info: #1F6FA8;
+  --color-info-foreground: #FFFFFF;
+  --color-info-01: #EEF5FB;
+  --color-info-05: #D8E8F5;
+  --color-info-50: #1F6FA8;
+  --color-info-60: #17557F;
+
+  /* ── Neutral scale (warm grey): borders, text levels, surfaces ────────── */
+  --color-neutral-00: #FBFAF7;
+  --color-neutral-05: #F3F1EC;
+  --color-neutral-10: #E6E2DA;
+  --color-neutral-20: #D3CEC4;
+  --color-neutral-30: #A9A39A;
+  --color-neutral-40: #7D776F;
+  --color-neutral-50: #5E5A54;
+  --color-neutral-60: #45423D;
+  --color-neutral-70: #2E2C29;
+  --color-neutral-80: #17181F;
+  --color-neutral-90: #0C0C10;
+
+  /* ── Borders, inputs, focus ring ───────────────────────────────────────── */
+  --color-border: #E6E2DA;
+  --color-input: #CFC9BE;
+  --color-ring: #12676E;
+  --color-outline-decorative: #E6E2DA;
+
+/* ── Radius scale ──────────────────────────────────────────────────────── */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+
+  /* ── Typography ────────────────────────────────────────────────────────── */
+  --font-sans: 'Mukta', 'Noto Sans Devanagari', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: ui-monospace, Consolas, 'Liberation Mono', monospace;
+
+  --text-xs: 0.8125rem;     --text-xs--line-height: 1.125rem;
+  --text-sm: 0.9375rem;     --text-sm--line-height: 1.375rem;
+  --text-base: 1.0625rem;   --text-base--line-height: 1.5rem;
+  --text-lg: 1.125rem;      --text-lg--line-height: 1.75rem;
+  --text-xl: 1.25rem;       --text-xl--line-height: 1.75rem;
+  --text-2xl: 1.5rem;       --text-2xl--line-height: 2rem;
+  --text-3xl: 1.875rem;     --text-3xl--line-height: 2.25rem;
+
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+}
+
+:root {
+  color-scheme: light;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  scrollbar-color: var(--color-neutral-20) transparent;
+  background-color: var(--color-page);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-primary-02);
+  color: var(--color-foreground);
+}
+
+/* Tailwind v4's preflight no longer sets `cursor: pointer` on native buttons —
+   it follows the UA default (`cursor: default`). Restore the expected hand
+   cursor for interactive controls app-wide so every button / clickable shows a
+   pointer on hover, instead of patching `cursor-pointer` per component. Placed
+   in @layer base so an explicit `cursor-*` utility still overrides it; disabled
+   controls are excluded so their `disabled:cursor-not-allowed` cursor stays. */
+@layer base {
+  button:not(:disabled):not([aria-disabled="true"]),
+  [role="button"]:not(:disabled):not([aria-disabled="true"]),
+  a[role="button"],
+  summary,
+  label[for],
+  select:not(:disabled),
+  input[type="checkbox"]:not(:disabled),
+  input[type="radio"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+/* Browsers (Chrome/WebKit) paint autofilled inputs with their own pale-yellow
+   background, overriding our transparent/white field styling. Mask it with a
+   large inset white box-shadow so autofilled fields stay pure white. */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px var(--color-card) inset;
+  box-shadow: 0 0 0 1000px var(--color-card) inset;
+  -webkit-text-fill-color: var(--color-foreground);
+  caret-color: var(--color-foreground);
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+
+/* DC / invoice print (meeting 2 §9): in print media, show ONLY the challan
+   template — the app shell, drawers and the preview toolbar disappear. */
+@media print {
+  /* State the sheet explicitly. Without `size`, Chrome falls back to its own
+     default paper — which is US Letter (215.9 × 279.4 mm), so every document
+     printed on the clinic's A4 came out on the wrong sheet. The 10mm margin
+     sits inside the unprintable border every consumer printer reserves (3–6mm);
+     at margin:0 the document's own border lines were shaved off by the printer.
+     (The browser's URL/date header is governed by the print dialog's own
+     "Headers and footers" setting, not by this margin.) */
+  @page {
+    size: A4 portrait;
+    margin: 10mm;
+  }
+  /* The document is portalled to <body>, so everything else in <body> is simply
+     removed from the printed page — the app shell (#root) AND every other
+     portalled layer: drawers, dialogs, toasts, tooltips. Hiding only #root is
+     not enough, because the detail drawer a document is printed FROM is itself
+     portalled to <body> and would print instead of the document.
+     This also replaces the old `body * { visibility: hidden }` trick, which hid
+     pixels but KEPT layout — the shell's full height still counted and pushed a
+     blank trailing page onto every document. */
+  body > *:not(.dc-print-overlay) {
+    display: none !important;
+  }
+  html,
+  body {
+    height: auto !important;
+    background: #fff !important;
+  }
+  /* Normal flow, NOT absolute: an absolutely-positioned document cannot
+     paginate — it emitted a blank trailing page on every print, and a long
+     invoice would have been clipped instead of continuing onto page 2.
+     Padding is dropped because @page margin now owns the whitespace. */
+  .dc-print {
+    position: static;
+    width: auto;
+    padding: 0;
+    box-shadow: none;
+  }
+  /* A table spanning pages repeats its header/footer instead of orphaning rows. */
+  .dc-print thead {
+    display: table-header-group;
+  }
+  .dc-print tfoot {
+    display: table-footer-group;
+  }
+  /* Never split a row, a totals block or a signature strip across a page. */
+  .dc-print tr,
+  .dc-print .no-break {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  /* Direct-print documents mount with Tailwind's `invisible` so nothing flashes
+     on screen before the print dialog opens. On paper they must be shown. */
+  .dc-print-overlay {
+    position: static;
+    background: none;
+    padding: 0;
+    overflow: visible;
+    visibility: visible !important;
+  }
+  .dc-print-toolbar {
+    display: none;
+  }
+}
